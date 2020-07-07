@@ -23,6 +23,9 @@ class IngredientsChartPage extends Component {
                     </Typography>
                     <br/>
                     <br/>
+                    <Paper elevation={3} style={{height: "100vh"}}>
+                        <IngredientsChart/>
+                    </Paper>
                     <br/>
                     <br/>
                 </Container>
