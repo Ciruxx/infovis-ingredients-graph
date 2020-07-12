@@ -52,6 +52,10 @@ class IngredientsChart extends Component {
             graph: {
                 nodes: [],
                 edges: []
+            },
+            drawer: {
+                open: false,
+                content: () => {}
             }
         }
     }
@@ -352,6 +356,7 @@ class IngredientsChart extends Component {
     render() {
         return (
             <div>
+                <Drawer open={this.state.drawer.open} content={this.state.drawer.content} onClose={this.drawerOnClose}/>
                 <VisNetworkReactComponent
                     data={this.state.graph}
                     options={options}
@@ -364,6 +369,19 @@ class IngredientsChart extends Component {
     }
 
     getNetwork(network) {this.setState({network})}
+
+    drawerOnClose(event) {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+        this.setState({
+            drawer: {
+                open: false,
+                content: () => {
+                }
+            }
+        })
+    }
 
     getCountryCode(area){
         switch (area) {
