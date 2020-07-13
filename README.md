@@ -59,7 +59,7 @@ I principali metodi della classe sono i seguenti:
     struttura simil html del componente, è un metodo obbligatorio in React.js.
  - `getNetwork`
     - Metodo helper che restituisce l'oggetto Vis.js.
- - `getNetwork`
+ - `drawerOnClose`
      - Metodo helper che setta lo stato interno quando il drawer viene chiuso.
  - `getCountryCode`
      - Metodo helper che traduce il nome di un paese con il codice CountryFlags corrispondente.
