@@ -2,7 +2,13 @@
 
 ## Informazioni tecniche
 
-Il progetto è stato sviluppato con il framework [React.js](https://it.reactjs.org/) e ovviamente [IngredientsChartPage.js](https://d3js.org/).
+Il progetto è stato sviluppato con il framework [React.js](https://it.reactjs.org/).
+
+Il cuore del progetto è la libreria [Vis.js](https://visjs.org), la quale gestisce la visualizzazione del grafo degli 
+alimenti.
+
+Le bandiere nazionali sono state recuperate grazie a [CountryFlags](https://www.countryflags.io), una semplice api che 
+restituisce le bandiere nazionali a partire da un codice.
 
 Tutti i path specificati in questo README.md sono relativi alla root di questo progetto.
  
@@ -12,38 +18,57 @@ per entrambi basta seguire questa [guida ufficiale](https://nodejs.org/it/downlo
 ## Struttura del progetto
 
 Dal punto di vista del progetto sono interessanti: 
- - Il file `./src/components/d3/charts/IngredientsChart.js`
-    - Il quale contiene il codice IngredientsChartPage.js rilevante ai fini di questo progetto.
- - La cartella `./src/data`
-    - La cartella che contiene i dati iniziali.
+ - Il file `./src/data/TheMealDB.js`
+    - Il quale contiene il codice necessario all'interrogazione del database degli alimenti.
+ - La cartella `./src/components`
+    - La cartella che contiene tutti i principali componenti dell'app.
 
-### Struttura del componente IngredientsChart
+### Componenti
+
+#### Ingredients Chart Page
+IngredientsChartPage.js è una classe Javascript che estende un componente React.
+
+Questo componente visualizza la pagina principale dell'app, non ha metodi particolari.
+
+#### Ingredients Chart
 
 IngredientsChart.js è una classe Javascript che estende un componente React.
 
-I metodi della classe sono i seguenti: 
+Questo componente si occupa di gestire Vis.js e gli eventi di click.
+
+I principali metodi della classe sono i seguenti: 
  - `constructor`
-    - Il costruttore della classe, vengono inizializzate tutte le variabili globali.
- - `draw`
-    - Questo metodo inizializza IngredientsChartPage.js con le informazioni prese dai dati iniziali, viene eseguito solo quando il componente 
-    viene inizializzato.
- - `handleClick`
-    - Questo metodo intercetta il click sinistro e il click destro e chiama il metodo `update` con i giusti input
- - `update`
-    - Questo metodo aggiorna tutte le rect IngredientsChartPage.js con le nuove informazioni, vengono passati in input due parametri:
-        - baseCharacteristic
-            - Può essere x o y, a seconda del click del mouse.
-        - changeCharacteristic
-            - Può essere una qualsiasi delle caratteristiche di una rect.
- - `getRandomColor`
-    - Questo metodo restituisce un colore random =)
+    - Il costruttore della classe, vengono inizializzate tutte le variabili globali e gli eventi.
+ - `componentDidMount`
+    - Questo metodo viene eseguito solo quando il componente viene montato, è utilizzato per inizializzare Vis.js con la
+    rete iniziale.
+ - `rightClick`
+    - Questo metodo intercetta il click destro e si occupa di eliminare tutti i nodi non più necessari dalla 
+    visualizzazione.
+ - `nodeDifference`
+    - Metodo helper per fare la differenza tra nodi.
+ - `singleClick`
+    - Questo metodo intercetta il singolo click sinistro e si occupa di aprire il drawer con le informazioni del nodo 
+    selezionato, recuperandole dal MealDB.
+ - `getContent`
+    - Metodo helper per generare il contenuto del drawer.
+ - `doubleClick`
+     - Questo metodo intercetta il doppio click sinistro e si occupa di espandere il nodo selezionato.
  - `render`
     - Questo metodo contiene il [JSX](https://it.reactjs.org/docs/introducing-jsx.html) del componente, ovvero, la 
     struttura simil html del componente, è un metodo obbligatorio in React.js.
- - `getSections`
-    - Funzione helper che genera JSX.
- - `getSubHeader`
-    - Funzione helper che genera JSX.
+ - `getNetwork`
+    - Metodo helper che restituisce l'oggetto Vis.js.
+ - `getNetwork`
+     - Metodo helper che setta lo stato interno quando il drawer viene chiuso.
+ - `getCountryCode`
+     - Metodo helper che traduce il nome di un paese con il codice CountryFlags corrispondente.
+     
+#### Drawer
+Drawer.js è una classe Javascript che estende un componente React.
+
+Questo componente visualizza il drawer con un contenuto passato per argomento, è stato reso così indipendente dal contenuto
+e dinamico, non ha metodi particolari.
 
 ## Test
 
