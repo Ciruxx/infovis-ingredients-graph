@@ -1,4 +1,4 @@
-# Dynamic Rect
+# Ingredients Graph by MC²
 
 ## Informazioni tecniche
 

@@ -16,7 +16,7 @@ class IngredientsChartPage extends Component {
                         Ingredients <strong>graph</strong>
                     </Typography>
                     <Typography variant="subtitle1" color="textSecondary" align="center">
-                        A very cool name for the group
+                        MC² Group
                     </Typography>
                     <Typography variant="subtitle2" color="textSecondary" align="center">
                         One click for information, two click to expand and right click to delete..easy 😁
