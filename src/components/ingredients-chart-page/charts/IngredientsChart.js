@@ -218,7 +218,21 @@ class IngredientsChart extends Component {
                             const {meals} = response.data;
                             const {strMealThumb, strMeal, strInstructions, strYoutube} = meals[0];
                             const regex = /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/;
-                            const youtubeId = strYoutube.match(regex)[1];
+                            let match = strYoutube.match(regex);
+                            let youTube;
+                            if(match){
+                                youTube = <YouTube videoId={match[1]} opts={{
+                                    height: '390',
+                                    width: '100%',
+                                    playerVars: {
+                                        autoplay: 0,
+                                    },
+                                }}/>;
+                            }
+                            else{
+                                youTube = <div/>
+                            }
+
                             resolve((
                                 <div>
                                     <img src={strMealThumb} alt={"Meal"} style={{
@@ -235,13 +249,7 @@ class IngredientsChart extends Component {
                                         </Typography>
                                         <br/>
                                         <br/>
-                                        <YouTube videoId={youtubeId} opts={{
-                                            height: '390',
-                                            width: '100%',
-                                            playerVars: {
-                                                autoplay: 0,
-                                            },
-                                        }}/>
+                                        {youTube}
                                     </div>
                                 </div>
                             ))
@@ -435,6 +443,9 @@ class IngredientsChart extends Component {
             }
             case "Moroccan":{
                 return "ma";
+            }
+            case "Polish": {
+                return "pl";
             }
             case "Russian":{
                 return "ru";
